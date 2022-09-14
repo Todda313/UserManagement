@@ -1,0 +1,35 @@
+<h3>Edit user</h3>
+<div class="ui segment">
+  <form class="ui form" [formGroup]="userForm">
+    <div class="field">
+      <label>First Name</label>
+      <input formControlName="firstName" />
+      <ng-container *ngIf="userForm.controls.firstName.touched && userForm.controls.firstName.errors">
+        <div *ngIf="userForm.controls.firstName.errors.required">Value is required</div>
+      </ng-container>
+    </div>
+    <div class="field">
+      <label>Last Name</label>
+      <input formControlName="lastName" />
+      <ng-container *ngIf="userForm.controls.lastName.touched && userForm.controls.lastName.errors">
+        <div *ngIf="userForm.controls.lastName.errors.required">Value is required</div>
+      </ng-container>
+    </div>
+    <div class="field">
+      <label>User Role</label>
+      <select formControlName="userRole">
+        <ng-container *ngFor="let role of roles">
+          <option [ng-selected]="role == user.userRole" [value]="role">{{ role }}</option>
+        </ng-container>
+      </select>
+    </div>
+    <div class="field">
+      <div class="ui toggle checkbox">
+        <input type="checkbox" name="userActive" formControlName="userActive">
+        <label>Active</label>
+      </div>
+    </div>
+    <button class="ui large button" (click)="onUpdate(userForm.value)">Update User</button>
+    <button class="ui large black button" (click)="onDelete()" routerLink="/users">Delete User</button>
+  </form>
+</div>

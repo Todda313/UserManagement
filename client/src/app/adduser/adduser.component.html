@@ -1,0 +1,38 @@
+<h3>Add User</h3>
+<div class="ui segment">
+  <form class="ui form" [formGroup]="userForm">
+    <div class="field">
+      <label>First Name</label>
+      <input formControlName="firstName" />
+      <ng-container *ngIf="userForm.controls.firstName.touched && userForm.controls.firstName.errors">
+        <div *ngIf="userForm.controls.firstName.errors.required">Value is required</div>
+      </ng-container>
+    </div>
+    <div class="field">
+      <label>Last Name</label>
+      <input formControlName="lastName" />
+      <ng-container *ngIf="userForm.controls.lastName.touched && userForm.controls.lastName.errors">
+        <div *ngIf="userForm.controls.lastName.errors.required">Value is required</div>
+      </ng-container>
+    </div>
+    <div class="field">
+      <label>User Role</label>
+      <select formControlName="userRole">
+        <option [selected]="true" disabled>- Select Role -</option>
+        <option value="Goalkeeper">Goalkeeper</option>
+        <option value="Defender">Defender</option>
+        <option value="Midfielder">Midfielder</option>
+        <option value="Forward">Forward</option>
+      </select>
+    </div>
+    <div class="field">
+      <div class="ui toggle checkbox">
+        <input type="checkbox" name="userActive" formControlName="userActive">
+        <label>Active</label>
+      </div>
+    </div>    
+    <button class="ui large button" [disabled]="userForm.invalid" (click)="onAdd(userForm.value)">
+      Add
+    </button>
+  </form>
+</div>
